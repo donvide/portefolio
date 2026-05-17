@@ -9,7 +9,7 @@ const projects = [
         image: "/projects/Capture d’écran du 2026-03-02 09-35-01.png",
        tags:["React", "Tailwind CSS", "NodeJS",  "Vite"],
        link:"#",
-       github:"#",
+       github:"https://github.com/donvide/portefolio",
     },
     {
         title: "Lending page ",
@@ -18,7 +18,7 @@ const projects = [
         media: "/projects/Capture vidéo du 2026-03-02 09-56-04.webm",
         tags: ["React", "Tailwind CSS", "Python"],
         link: "#",
-        github: "#",
+        github: "https://github.com/donvide/portefolio",
     }
 
 
@@ -99,7 +99,12 @@ export const Project = () => {
                                     Voir le projet
                                     <ArrowUpRight className="w-4 h-4"/>
                                 </a>
-                                <a href={project.github} className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-medium text-muted-foreground transition-all duration-300 hover:border-primary/50 hover:text-primary">
+                                <a
+                                    href={project.github}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-medium text-muted-foreground transition-all duration-300 hover:border-primary/50 hover:text-primary"
+                                >
                                     Code source
                                     <Github className="w-4 h-4"/>
                                 </a>
