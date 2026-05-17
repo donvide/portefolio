@@ -1,18 +1,19 @@
 import { Button } from "@/components/Button";
+import { useLanguage } from "@/i18n/useLanguage";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 
-const navLinks = [
-    {href: "#about", label: "À propos"},
-    {href: "#projects", label: "Projets"},
-    {href: "#experience", label: "Expérience"},
-    {href: "#testimonials", label: "Témoignages"}
-];
-
 export const Navbar = () => {
+    const { language, t, toggleLanguage } = useLanguage();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const navLinks = [
+        {href: "#about", label: t.nav.about},
+        {href: "#projects", label: t.nav.projects},
+        {href: "#experience", label: t.nav.experience},
+        {href: "#testimonials", label: t.nav.testimonials}
+    ];
 
     useEffect(() => {
         const handleScroll = () => {
@@ -44,8 +45,16 @@ export const Navbar = () => {
             </div>
 
           {/* CTA Button */}
-          <div className="hidden md:block ">
-            <Button size="sm">Contactez moi</Button>
+          <div className="hidden md:flex items-center gap-3">
+            <button
+                type="button"
+                aria-label={t.nav.languageLabel}
+                onClick={toggleLanguage}
+                className="rounded-full border border-border px-4 py-2 text-sm font-medium text-muted-foreground transition-all duration-300 hover:border-primary/50 hover:text-primary"
+            >
+                {language.toUpperCase()}
+            </button>
+            <Button size="sm">{t.nav.contact}</Button>
           </div>
 
             {/* Mobile Menu Button */}
@@ -73,7 +82,14 @@ export const Navbar = () => {
                             {link.label}
                         </a>
                     ))}
-                    <Button onClick={() => setIsMobileMenuOpen(false)}>Contactez moi</Button>
+                    <button
+                        type="button"
+                        onClick={toggleLanguage}
+                        className="w-fit rounded-full border border-border px-4 py-2 text-sm font-medium text-muted-foreground transition-all duration-300 hover:border-primary/50 hover:text-primary"
+                    >
+                        {language.toUpperCase()}
+                    </button>
+                    <Button onClick={() => setIsMobileMenuOpen(false)}>{t.nav.contact}</Button>
                 </div>
             </div>
         )}

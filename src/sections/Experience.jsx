@@ -8,98 +8,36 @@ import {
     Network,
     Smartphone,
 } from "lucide-react";
+import { useLanguage } from "@/i18n/useLanguage";
 
-const experiences = [
+const experienceMeta = [
     {
-        period: "2024 - Aujourd'hui",
-        title: "Licence en informatique de gestion",
-        organization: "HECM, Haute Ecole de Commerce et de Management",
-        location: "Bénin",
-        status: "Formation",
         icon: GraduationCap,
-        description:
-            "Parcours académique orienté analyse, développement logiciel, bases de données et réseaux. Cette formation consolide ma rigueur technique et ma capacité à concevoir des solutions numériques structurées.",
-        achievements: [
-            "Approfondissement des concepts de base de données, modélisation et requêtes SQL.",
-            "Renforcement des compétences en réseau, logique informatique et méthodologie de projet.",
-            "Travaux pratiques et projets de groupe autour du développement web.",
-        ],
         stack: ["Base de données", "Réseau", "Analyse", "SQL"],
     },
     {
-        period: "Juin 2025 - Août 2025",
-        title: "Stagiaire en développement web et réseau",
-        organization: "CITECH Sarl",
-        location: "Bénin",
-        status: "Stage",
         icon: BriefcaseBusiness,
-        description:
-            "Première immersion professionnelle dans un environnement technique. J'y ai développé des bases solides en développement backend, gestion de bases de données et administration réseau.",
-        achievements: [
-            "Participation à des travaux pratiques autour de PHP et MySQL.",
-            "Découverte des principes de configuration et de diagnostic réseau.",
-            "Application des acquis scolaires dans des situations professionnelles concrètes.",
-        ],
         stack: ["PHP", "MySQL", "Réseau", "Support technique"],
     },
     {
-        period: "Juin 2026 - Août 2026",
-        title: "Stage prévu en développement mobile et web",
-        organization: "CITECH Sarl",
-        location: "Bénin",
-        status: "Prévu",
         icon: Smartphone,
-        description:
-            "Nouvelle expérience prévue chez CITECH Sarl, orientée développement mobile, backend web et consolidation des compétences réseau.",
-        achievements: [
-            "Montée en compétence prévue sur Flutter pour le développement mobile.",
-            "Pratique renforcée de Laravel, PHP et des fondamentaux réseau.",
-            "Objectif : produire des interfaces utiles, fiables et mieux structurées.",
-        ],
         stack: ["Flutter", "Laravel", "PHP", "Réseau"],
     },
     {
-        period: "Projets académiques",
-        title: "Développement d'applications en groupe",
-        organization: "HECM et projets personnels",
-        location: "Travail collaboratif",
-        status: "Projet",
         icon: Code2,
-        description:
-            "Réalisation de petits projets en équipe qui m'ont permis de mieux comprendre le cycle de développement, la collaboration et la construction d'interfaces modernes.",
-        achievements: [
-            "Création de fonctionnalités avec React, JavaScript, Node.js et Express.",
-            "Utilisation de Git et GitHub pour organiser le travail en équipe.",
-            "Développement d'une meilleure logique frontend, backend et API.",
-        ],
         stack: ["React", "Node.js", "Express", "JavaScript", "Git/GitHub"],
     },
 ];
 
-const focusAreas = [
-    {
-        icon: Database,
-        title: "Données",
-        description: "Modélisation, SQL, MySQL et logique de stockage.",
-    },
-    {
-        icon: Network,
-        title: "Réseau",
-        description: "Bases réseau, diagnostic et compréhension des infrastructures.",
-    },
-    {
-        icon: Code2,
-        title: "Web",
-        description: "Interfaces React, APIs Express, PHP et Laravel.",
-    },
-    {
-        icon: Smartphone,
-        title: "Mobile",
-        description: "Apprentissage Flutter pour créer des applications mobiles.",
-    },
-];
+const focusIcons = [Database, Network, Code2, Smartphone];
 
 export const Experience = () => {
+    const { t } = useLanguage();
+    const experiences = experienceMeta.map((experience, index) => ({
+        ...experience,
+        ...t.experience.items[index],
+    }));
+
     return (
         <section id="experience" className="relative overflow-hidden py-24 md:py-32">
             <div className="absolute left-0 top-24 h-80 w-80 rounded-full bg-primary/5 blur-3xl"></div>
@@ -108,16 +46,14 @@ export const Experience = () => {
             <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="mx-auto mb-16 max-w-3xl text-center">
                     <span className="text-sm font-medium uppercase tracking-wider text-secondary-foreground">
-                        Parcours & expériences
+                        {t.experience.eyebrow}
                     </span>
                     <h2 className="mt-4 text-4xl font-bold text-secondary-foreground md:text-5xl">
-                        Une progression
-                        <span className="font-serif italic font-normal text-white"> construite par la pratique</span>
+                        {t.experience.titleStart}
+                        <span className="font-serif italic font-normal text-white">{t.experience.titleEnd}</span>
                     </h2>
                     <p className="mt-6 text-muted-foreground">
-                        Étudiant en deuxième année de licence, je développe mes compétences à travers la formation,
-                        les stages et les projets de groupe, avec une attention particulière pour le web, les données,
-                        le mobile et les réseaux.
+                        {t.experience.description}
                     </p>
                 </div>
 
@@ -127,32 +63,34 @@ export const Experience = () => {
                             <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
                                 <GraduationCap className="h-6 w-6" />
                             </div>
-                            <h3 className="text-2xl font-semibold text-foreground">Profil actuel</h3>
+                            <h3 className="text-2xl font-semibold text-foreground">{t.experience.profileTitle}</h3>
                             <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                                Je suis étudiant en deuxième année de licence à HECM. Mon parcours combine des bases
-                                académiques solides, des stages techniques chez CITECH Sarl et des projets collaboratifs
-                                qui renforcent ma capacité à apprendre vite et à produire du concret.
+                                {t.experience.profile}
                             </p>
                         </div>
 
                         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1">
-                            {focusAreas.map((area, index) => (
-                                <div
-                                    key={area.title}
-                                    className="group glass animate-fade-in rounded-2xl p-5 transition-all duration-500 hover:-translate-y-1 hover:border-primary/40 hover:bg-surface/70"
-                                    style={{ animationDelay: `${(index + 1) * 100}ms` }}
-                                >
-                                    <div className="flex items-start gap-4">
-                                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary/20">
-                                            <area.icon className="h-5 w-5" />
-                                        </div>
-                                        <div>
-                                            <h4 className="font-semibold text-foreground">{area.title}</h4>
-                                            <p className="mt-1 text-sm text-muted-foreground">{area.description}</p>
+                            {t.experience.focusAreas.map((area, index) => {
+                                const Icon = focusIcons[index];
+
+                                return (
+                                    <div
+                                        key={area.title}
+                                        className="group glass animate-fade-in rounded-2xl p-5 transition-all duration-500 hover:-translate-y-1 hover:border-primary/40 hover:bg-surface/70"
+                                        style={{ animationDelay: `${(index + 1) * 100}ms` }}
+                                    >
+                                        <div className="flex items-start gap-4">
+                                            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary/20">
+                                                <Icon className="h-5 w-5" />
+                                            </div>
+                                            <div>
+                                                <h4 className="font-semibold text-foreground">{area.title}</h4>
+                                                <p className="mt-1 text-sm text-muted-foreground">{area.description}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     </div>
 

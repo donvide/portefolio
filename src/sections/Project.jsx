@@ -1,125 +1,119 @@
-import { ArrowUpRight, Github } from "lucide-react";
 import { AnimateBorderButton } from "@/components/AnimateBorderButton";
+import { useLanguage } from "@/i18n/useLanguage";
+import { ArrowUpRight, Github } from "lucide-react";
 
-const projects = [
+const projectAssets = [
     {
-        title:"Mon portefolio" ,
-        description: "Réalisé avec React, Tailwind CSS et Vite, ce projet met en avant mes compétences en développement web et ma passion pour la création de sites modernes et réactifs.",
         mediaType: "image",
         image: "/projects/Capture d’écran du 2026-03-02 09-35-01.png",
-       tags:["React", "Tailwind CSS", "NodeJS",  "Vite"],
-       link:"#",
-       github:"https://github.com/donvide/portefolio",
+        tags: ["React", "Tailwind CSS", "NodeJS", "Vite"],
+        link: "#",
+        github: "https://github.com/donvide/portefolio",
     },
     {
-        title: "Lending page ",
-        description: "Un projet de landing page réalisé avec React et Tailwind CSS et Python.",
         mediaType: "video",
         media: "/projects/Capture vidéo du 2026-03-02 09-56-04.webm",
         tags: ["React", "Tailwind CSS", "Python"],
         link: "#",
         github: "https://github.com/donvide/portefolio",
-    }
+    },
+];
 
-
-]
 export const Project = () => {
+    const { t } = useLanguage();
+    const projects = projectAssets.map((project, index) => ({
+        ...project,
+        ...t.projects.items[index],
+    }));
+
     return (
-        <section id="projects" className="py-24 md:py-32 relative overflow-hidden">
-            {/* Background glows */}
-            <div className="absolute top-1/4 right-0  w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-highlight/5 rounded-full blur-3xl"></div>
-            <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-                {/* Section Header */}
+        <section id="projects" className="relative overflow-hidden py-24 md:py-32">
+            <div className="absolute right-0 top-1/4 h-96 w-96 rounded-full bg-primary/5 blur-3xl"></div>
+            <div className="absolute bottom-1/4 left-0 h-64 w-64 rounded-full bg-highlight/5 blur-3xl"></div>
+            <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div className="mx-auto mb-16 max-w-3xl text-center">
+                    <span className="text-sm font-medium uppercase tracking-wider text-secondary-foreground">
+                        {t.projects.eyebrow}
+                    </span>
+                    <h2 className="mt-4 mb-6 text-4xl font-bold text-secondary-foreground md:text-5xl">
+                        {t.projects.titleStart}
+                        <span className="font-serif italic font-normal text-white">{t.projects.titleEnd}</span>
+                    </h2>
 
-            <div className="text-center mx-auto max-w-3xl mb-16">
-                <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase animation-pulse">
-                    Présentation d'oeuvres
-                </span>
-                <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-secondary-foreground">
-                    Projets 
-                     <span className="font-serif italic font-normal text-white"> récents</span>
-                </h2>
+                    <p className="text-muted-foreground animate-fade-in animation-delay-200">
+                        {t.projects.description}
+                    </p>
+                </div>
 
-                <p className="text-muted-foreground animate-fade-in animation-delay-200">
-                    Une sélection de mes projets les plus récents, mettant en avant mes compétences en développement web et ma passion pour la création de solutions innovantes. Chaque projet reflète mon engagement à créer des expériences utilisateur exceptionnelles et à résoudre des problèmes complexes avec des solutions élégantes.
-                </p>
-            </div>    
-
-            {/* Projects Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                {projects.map((project, index) => (
-                    <div
-                        key={index}
-                        className="group flex h-full flex-col bg-card border border-border rounded-xl overflow-hidden shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:border-primary/40"
-                    >
-                        <div className="relative overflow-hidden">
-                            {project.mediaType === "image" ? (
-                                <img
-                                    src={project.image}
-                                    alt={project.title}
-                                    className="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-110"
-                                />
-                            ) : (
-                                <video
-                                    src={project.media}
-                                    className="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-105"
-                                    controls
-                                />
-                            )}
-                            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-black/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
-                        </div>
-
-                        {/* Contenue */}
-                        <div className="flex flex-1 flex-col p-6 space-y-4">
-                            <div className="flex items-start justify-between">
-                                <h3 className="text-xl font-semibold group-hover:text-primary transition-colors">{project.title}</h3>
-                                <ArrowUpRight 
-                                    className="w-5 h-5 
-                                    text-muted-foreground group-hover:text-primary
-                                    group-hover:translate-x-1
-                                    group-hover:-translate-y-1 transition-all"
-                                />
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
+                    {projects.map((project, index) => (
+                        <div
+                            key={`${project.title}-${index}`}
+                            className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-lg transition-all duration-500 hover:-translate-y-2 hover:border-primary/40 hover:shadow-2xl"
+                        >
+                            <div className="relative overflow-hidden">
+                                {project.mediaType === "image" ? (
+                                    <img
+                                        src={project.image}
+                                        alt={project.title}
+                                        className="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                ) : (
+                                    <video
+                                        src={project.media}
+                                        className="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                        controls
+                                    />
+                                )}
+                                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-black/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
                             </div>
-                            <p className="text-muted-foreground text-sm">{project.description}</p>
-                            <div className="flex flex-wrap gap-2">
-                                {project.tags.map((tag, tagIndex) => (
-                                    <span
-                                        key={`${project.title}-${tagIndex}`}
-                                        className="px-4 py-1.5 rounded-full bg-surface text-xs font-medium border border-border/50 text-muted-foreground hover:border-primary/50"
+
+                            <div className="flex flex-1 flex-col space-y-4 p-6">
+                                <div className="flex items-start justify-between">
+                                    <h3 className="text-xl font-semibold transition-colors group-hover:text-primary">
+                                        {project.title}
+                                    </h3>
+                                    <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-primary" />
+                                </div>
+                                <p className="text-sm text-muted-foreground">{project.description}</p>
+                                <div className="flex flex-wrap gap-2">
+                                    {project.tags.map((tag, tagIndex) => (
+                                        <span
+                                            key={`${project.title}-${tagIndex}`}
+                                            className="rounded-full border border-border/50 bg-surface px-4 py-1.5 text-xs font-medium text-muted-foreground hover:border-primary/50"
+                                        >
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="mt-auto border-t border-border/70 p-6 transition-colors duration-300 group-hover:bg-card/70">
+                                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                                    <a
+                                        href={project.link}
+                                        className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:-translate-y-px hover:bg-primary/90"
                                     >
-                                        {tag}
-                                    </span>
-                                ))}
+                                        {t.projects.viewProject}
+                                        <ArrowUpRight className="h-4 w-4" />
+                                    </a>
+                                    <a
+                                        href={project.github}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-medium text-muted-foreground transition-all duration-300 hover:border-primary/50 hover:text-primary"
+                                    >
+                                        {t.projects.sourceCode}
+                                        <Github className="h-4 w-4" />
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <div className="mt-auto border-t border-border/70 p-6 transition-colors duration-300 group-hover:bg-card/70">
-                            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                                <a href={project.link} className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:bg-primary/90 hover:translate-y-[-1px]">
-                                    Voir le projet
-                                    <ArrowUpRight className="w-4 h-4"/>
-                                </a>
-                                <a
-                                    href={project.github}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-medium text-muted-foreground transition-all duration-300 hover:border-primary/50 hover:text-primary"
-                                >
-                                    Code source
-                                    <Github className="w-4 h-4"/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
 
-            {/* Call to Action */}
-           <div className="mt-12 flex justify-center">    
-            <AnimateBorderButton >
-                Voir plus de projets
-            </AnimateBorderButton>
-           </div>
+                <div className="mt-12 flex justify-center">
+                    <AnimateBorderButton>{t.projects.more}</AnimateBorderButton>
+                </div>
             </div>
         </section>
     );

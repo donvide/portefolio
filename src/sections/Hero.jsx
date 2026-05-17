@@ -1,4 +1,5 @@
 import { Button } from "@/components/Button";
+import { useLanguage } from "@/i18n/useLanguage";
 import { ArrowRight, ChevronDown, Download, Github, Instagram, Linkedin, Twitter } from "lucide-react";
 import { AnimateBorderButton } from "../components/AnimateBorderButton";
 
@@ -30,6 +31,8 @@ const particles = Array.from({ length: 30 }, (_, index) => ({
 }));
 
 export const Hero = () => {
+    const { t } = useLanguage();
+
     const handleScrollToAbout = (event) => {
         event.preventDefault();
         const aboutSection = document.getElementById("about");
@@ -72,41 +75,39 @@ export const Hero = () => {
                     <div className="animate-fade-in">
                         <span className="inline-flex items-center gap-2 p-2 rounded-full glass text-sm text-primary ">
                             <span className="w-3 h-3 bg-primary rounded-full animate-pulse"/>
-                            Analyste programmeur
+                            {t.hero.role}
                         </span>
                     </div>
 
                     {/* Titre principal  */}
                     <div className="space-y-4">
                         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in animation-delay-100  glass-text">
-                            Créateur <span className="text-primary glow-text">d'expériences</span>
+                            {t.hero.titleStart} <span className="text-primary glow-text">{t.hero.titleHighlight}</span>
                             <br />
-                            numériques
+                            {t.hero.titleMiddle}
                             <br />
                             <span className="font-serif italic font-normal text-white">
-                                de haute précision. 
+                                {t.hero.titleEnd}
                             </span>
                         </h1>
                         <p 
                           className="text-lg text-muted-foreground max-w-lg animate-fade-in animation-delay-800 glass-text"
                         >
-                           Salut, je  suis Marius Donvide, ingénieur en informatique.
-                           Spécialisé dans le développement web mobile et logiciel, je  construis des expériences numérique avec précision en utilisant des technologies
-                           modernes. Expert de  l'écosystème JavaScript, l'interactivité de React et la robutesse de Node.js.
+                           {t.hero.intro}
                         </p>
                     </div>
 
                  {/* Bouton d'appel à l'action  */}
                  <div className="flex flex-wrap gap-6 animate-fade-in animation-delay-300">
-                    <Button size="lg">Contactez moi <ArrowRight size={16}/></Button>
+                    <Button size="lg">{t.hero.contact} <ArrowRight size={16}/></Button>
                     <AnimateBorderButton>
-                        <Download size={18} /> Téléchargez mon CV
+                        <Download size={18} /> {t.hero.downloadCv}
                     </AnimateBorderButton>
                  </div>
 
                  {/* Réseaux sociaux  */}
                  <div className="flex items-center gap-4 animate-fade-in animation-delay-500">
-                    <span className="text-sm text-muted-foreground">Me suivre sur :</span>
+                    <span className="text-sm text-muted-foreground">{t.hero.follow}</span>
                     {[
                         {icon:Github, href:"#"},
                         {icon:Linkedin, href:"#"},
@@ -139,13 +140,13 @@ export const Hero = () => {
                         <div className="absolute -bottom-4  -right-4 glass rounded-xl px-4 py-3 animate-float">
                             <div className="flex items-center gap-3">
                              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"/>
-                            <span className="text-sm font-medium text-white">Disponible immédiatement</span>
+                            <span className="text-sm font-medium text-white">{t.hero.available}</span>
                             </div>
                         </div>
                         {/* stat badge  */}
                         <div className="absolute -top-4 -left-4 glass rounded-xl px-4 py-3 animate-float animation-delay-500">
                             <div className="text-2xl font-bold text-primary ">+2</div>
-                            <div className="text-xs text-muted-foreground font-medium">ans Exp</div>
+                            <div className="text-xs text-muted-foreground font-medium">{t.hero.years}</div>
                         </div>
                        </div>
                     </div>
@@ -155,7 +156,7 @@ export const Hero = () => {
                 {/* Compétences  */}
             <div className="mt-20 animate-fade-in animation-delay-600">
                 <p className="text-sm text-muted-foreground mb-6 text-center">
-                    Technologies avec lesquelles je travaille :
+                    {t.hero.techLabel}
                 </p>
                 <div className="relative overflow-hidden">
                     <div className="flex animate-marquee ">
@@ -174,7 +175,7 @@ export const Hero = () => {
             href="#about" 
             onClick={handleScrollToAbout}
             className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary/80 transition-colors duration-300">
-                <span className="text-xs uppercase tracking-wider ">Scroll</span>
+                <span className="text-xs uppercase tracking-wider ">{t.hero.scroll}</span>
                 <ChevronDown size={36} className="animate-bounce"/>
             </a>
          </div>
