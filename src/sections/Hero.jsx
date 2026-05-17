@@ -41,6 +41,10 @@ export const Hero = () => {
         }
     };
 
+    const handleScrollToContact = () => {
+        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
     return <section className="relative min-h-screen flex items-center  overflow-hidden">
         {/* Background Elements */}
 
@@ -99,7 +103,7 @@ export const Hero = () => {
 
                  {/* Bouton d'appel à l'action  */}
                  <div className="flex flex-wrap gap-6 animate-fade-in animation-delay-300">
-                    <Button size="lg">{t.hero.contact} <ArrowRight size={16}/></Button>
+                    <Button size="lg" onClick={handleScrollToContact}>{t.hero.contact} <ArrowRight size={16}/></Button>
                     <AnimateBorderButton>
                         <Download size={18} /> {t.hero.downloadCv}
                     </AnimateBorderButton>

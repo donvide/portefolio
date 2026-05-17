@@ -12,8 +12,14 @@ export const Navbar = () => {
         {href: "#about", label: t.nav.about},
         {href: "#projects", label: t.nav.projects},
         {href: "#experience", label: t.nav.experience},
-        {href: "#testimonials", label: t.nav.testimonials}
+        {href: "#testimonials", label: t.nav.testimonials},
+        {href: "#contact", label: t.nav.contactLink}
     ];
+
+    const handleContactClick = () => {
+        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        setIsMobileMenuOpen(false);
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -54,7 +60,7 @@ export const Navbar = () => {
             >
                 {language.toUpperCase()}
             </button>
-            <Button size="sm">{t.nav.contact}</Button>
+            <Button size="sm" onClick={handleContactClick}>{t.nav.contact}</Button>
           </div>
 
             {/* Mobile Menu Button */}
@@ -89,7 +95,7 @@ export const Navbar = () => {
                     >
                         {language.toUpperCase()}
                     </button>
-                    <Button onClick={() => setIsMobileMenuOpen(false)}>{t.nav.contact}</Button>
+                    <Button onClick={handleContactClick}>{t.nav.contact}</Button>
                 </div>
             </div>
         )}
