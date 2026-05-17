@@ -59,7 +59,7 @@ export const Testimoniales = () => {
                     </span>
                     <h2 className="mt-4 text-4xl font-bold text-secondary-foreground md:text-5xl">
                         {t.testimonials.titleStart}
-                        <span className="font-serif italic font-normal text-white">{t.testimonials.titleEnd}</span>
+                        <span className="font-serif italic font-normal text-foreground">{t.testimonials.titleEnd}</span>
                     </h2>
                     <p className="mt-6 text-muted-foreground">{t.testimonials.description}</p>
                 </div>

@@ -1,15 +1,19 @@
 import { Button } from "@/components/Button";
 import { useLanguage } from "@/i18n/useLanguage";
-import { Menu, X } from "lucide-react";
+import { useTheme } from "@/theme/useTheme";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 
 export const Navbar = () => {
     const { language, t, toggleLanguage } = useLanguage();
+    const { theme, toggleTheme } = useTheme();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const navLinks = [
         {href: "#about", label: t.nav.about},
+        {href: "#services", label: t.nav.services},
+        {href: "#skills", label: t.nav.skills},
         {href: "#projects", label: t.nav.projects},
         {href: "#experience", label: t.nav.experience},
         {href: "#testimonials", label: t.nav.testimonials},
@@ -43,7 +47,7 @@ export const Navbar = () => {
                 <div className="glass rounded-full flex px-2 py-1 items-center gap-1">
                     {navLinks.map((link, index) => (
                         <a href={link.href} key={index}
-                        className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground rounded-full hover:bg-surface">
+                        className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-full hover:bg-surface">
                             {link.label}
                         </a>
                     ))}
@@ -52,6 +56,14 @@ export const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center gap-3">
+            <button
+                type="button"
+                aria-label={t.nav.themeLabel}
+                onClick={toggleTheme}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-all duration-300 hover:border-primary/50 hover:text-primary"
+            >
+                {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
             <button
                 type="button"
                 aria-label={t.nav.languageLabel}
@@ -88,6 +100,14 @@ export const Navbar = () => {
                             {link.label}
                         </a>
                     ))}
+                    <button
+                        type="button"
+                        onClick={toggleTheme}
+                        className="inline-flex w-fit items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium text-muted-foreground transition-all duration-300 hover:border-primary/50 hover:text-primary"
+                    >
+                        {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+                        {t.nav.themeLabel}
+                    </button>
                     <button
                         type="button"
                         onClick={toggleLanguage}

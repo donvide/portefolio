@@ -1,16 +1,52 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>portefolio.json</title>
+    <title>Marius Donvide | Portfolio développeur web, mobile et logiciel</title>
+    <meta
+      name="description"
+      content="Portfolio de Marius Donvide, étudiant développeur et analyste programmeur spécialisé en React, Node.js, PHP, Laravel, Flutter, MySQL et réseau."
+    />
+    <meta name="author" content="Marius Donvide" />
+    <meta name="theme-color" content="#0f1418" />
+    <meta property="og:title" content="Marius Donvide | Portfolio développeur" />
+    <meta
+      property="og:description"
+      content="Découvrez les projets, compétences, expériences et services de Marius Donvide en développement web, mobile, backend, bases de données et réseau."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/marius.jpeg" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Marius Donvide | Portfolio développeur" />
+    <meta
+      name="twitter:description"
+      content="Portfolio développeur web, mobile et logiciel avec React, Node.js, PHP, Laravel, Flutter et MySQL."
+    />
+    <meta name="twitter:image" content="/marius.jpeg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div style="min-height:100vh;display:grid;place-items:center;background:#0f1418;color:#f0f2f5;font-family:Inter,system-ui,sans-serif;">
+        <div style="text-align:center;">
+          <div style="width:44px;height:44px;border:3px solid rgba(32,178,166,.2);border-top-color:#20b2a6;border-radius:999px;margin:0 auto 16px;animation:spin .8s linear infinite;"></div>
+          <p style="margin:0;color:#7a8491;">Chargement du portfolio...</p>
+        </div>
+      </div>
+    </div>
+    <style>
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -1,4 +1,5 @@
 import { AnimateBorderButton } from "@/components/AnimateBorderButton";
+import { Reveal } from "@/components/Reveal";
 import { useLanguage } from "@/i18n/useLanguage";
 import { ArrowUpRight, Github } from "lucide-react";
 
@@ -37,7 +38,7 @@ export const Project = () => {
                     </span>
                     <h2 className="mt-4 mb-6 text-4xl font-bold text-secondary-foreground md:text-5xl">
                         {t.projects.titleStart}
-                        <span className="font-serif italic font-normal text-white">{t.projects.titleEnd}</span>
+                        <span className="font-serif italic font-normal text-foreground">{t.projects.titleEnd}</span>
                     </h2>
 
                     <p className="text-muted-foreground animate-fade-in animation-delay-200">
@@ -47,8 +48,9 @@ export const Project = () => {
 
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
                     {projects.map((project, index) => (
-                        <div
+                        <Reveal
                             key={`${project.title}-${index}`}
+                            delay={index * 120}
                             className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-lg transition-all duration-500 hover:-translate-y-2 hover:border-primary/40 hover:shadow-2xl"
                         >
                             <div className="relative overflow-hidden">
@@ -107,7 +109,7 @@ export const Project = () => {
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </Reveal>
                     ))}
                 </div>
 

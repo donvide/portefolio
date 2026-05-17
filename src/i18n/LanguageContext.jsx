@@ -1,16 +1,19 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { LanguageContext } from "@/i18n/LanguageContextValue";
 
 const translations = {
     fr: {
         nav: {
             about: "À propos",
+            services: "Services",
+            skills: "Compétences",
             projects: "Projets",
             experience: "Expérience",
             testimonials: "Témoignages",
             contactLink: "Contact",
             contact: "Contactez moi",
             languageLabel: "Passer en anglais",
+            themeLabel: "Changer de thème",
         },
         hero: {
             role: "Analyste programmeur",
@@ -154,6 +157,59 @@ const translations = {
                 },
             ],
         },
+        services: {
+            eyebrow: "Services",
+            titleStart: "Ce que je peux",
+            titleEnd: " construire",
+            description:
+                "Des services adaptés à mon profil d'étudiant développeur : sérieux, progression rapide et bases solides en web, mobile, données et réseau.",
+            items: [
+                {
+                    title: "Développement web",
+                    description: "Création de sites modernes, responsives et orientés expérience utilisateur.",
+                },
+                {
+                    title: "Développement mobile",
+                    description: "Conception d'applications mobiles avec Flutter et interfaces propres.",
+                },
+                {
+                    title: "Intégration frontend",
+                    description: "Transformation de maquettes en interfaces React fluides, accessibles et maintenables.",
+                },
+                {
+                    title: "Backend & API",
+                    description: "Mise en place de logiques serveur avec Node.js, Express, PHP ou Laravel.",
+                },
+                {
+                    title: "Base de données",
+                    description: "Modélisation, requêtes SQL et gestion de données avec MySQL.",
+                },
+                {
+                    title: "Réseau & support",
+                    description: "Bases réseau, diagnostic, configuration et accompagnement technique.",
+                },
+            ],
+        },
+        skills: {
+            eyebrow: "Compétences",
+            titleStart: "Une base technique",
+            titleEnd: " structurée",
+            description:
+                "Mes compétences sont organisées par domaine pour montrer clairement où j'interviens et les outils que j'utilise.",
+            stats: [
+                { label: "Années d'apprentissage", value: 2, suffix: "+" },
+                { label: "Domaines techniques", value: 6, suffix: "" },
+                { label: "Projets pratiques", value: 4, suffix: "+" },
+            ],
+            groups: [
+                { title: "Frontend", items: ["React", "JavaScript", "Tailwind CSS", "HTML/CSS"] },
+                { title: "Backend", items: ["Node.js", "Express", "PHP", "Laravel"] },
+                { title: "Mobile", items: ["Flutter", "Interfaces mobiles", "Responsive design"] },
+                { title: "Base de données", items: ["MySQL", "SQL", "Modélisation"] },
+                { title: "Outils", items: ["Git", "GitHub", "Vite", "VS Code"] },
+                { title: "Réseau", items: ["Fondamentaux réseau", "Diagnostic", "Support technique"] },
+            ],
+        },
         testimonials: {
             eyebrow: "Avis & retours",
             titleStart: "Ils peuvent laisser",
@@ -185,17 +241,35 @@ const translations = {
             emailSubject: "Contact depuis votre portfolio",
             emailBody: "Bonjour Marius,%0D%0A%0D%0AJe viens de visiter votre portfolio et j'aimerais échanger avec vous.",
             availability: "Disponible pour projets, stages et collaborations.",
+            formTitle: "Envoyer un message",
+            nameLabel: "Nom",
+            senderEmailLabel: "Email",
+            messageLabel: "Message",
+            namePlaceholder: "Votre nom",
+            senderEmailPlaceholder: "votre.email@example.com",
+            messagePlaceholder: "Décrivez votre besoin ou votre projet...",
+            send: "Préparer l'email",
+            formNote:
+                "Le formulaire prépare un email avec votre message. Pour un envoi direct sans application mail, il faudra connecter un service comme Formspree, EmailJS ou Resend.",
+        },
+        notFound: {
+            title: "Page introuvable",
+            description: "Cette page n'existe pas encore. Revenez à l'accueil pour continuer la visite.",
+            action: "Retour à l'accueil",
         },
     },
     en: {
         nav: {
             about: "About",
+            services: "Services",
+            skills: "Skills",
             projects: "Projects",
             experience: "Experience",
             testimonials: "Testimonials",
             contactLink: "Contact",
             contact: "Contact me",
             languageLabel: "Switch to French",
+            themeLabel: "Toggle theme",
         },
         hero: {
             role: "Programmer analyst",
@@ -339,6 +413,59 @@ const translations = {
                 },
             ],
         },
+        services: {
+            eyebrow: "Services",
+            titleStart: "What I can",
+            titleEnd: " build",
+            description:
+                "Services aligned with my developer profile: serious execution, fast learning and solid foundations in web, mobile, data and networking.",
+            items: [
+                {
+                    title: "Web development",
+                    description: "Building modern, responsive websites focused on user experience.",
+                },
+                {
+                    title: "Mobile development",
+                    description: "Designing mobile applications with Flutter and clean interfaces.",
+                },
+                {
+                    title: "Frontend integration",
+                    description: "Turning designs into smooth, accessible and maintainable React interfaces.",
+                },
+                {
+                    title: "Backend & API",
+                    description: "Creating server logic with Node.js, Express, PHP or Laravel.",
+                },
+                {
+                    title: "Databases",
+                    description: "Modeling, SQL queries and data management with MySQL.",
+                },
+                {
+                    title: "Networking & support",
+                    description: "Network basics, diagnostics, configuration and technical support.",
+                },
+            ],
+        },
+        skills: {
+            eyebrow: "Skills",
+            titleStart: "A structured",
+            titleEnd: " technical base",
+            description:
+                "My skills are grouped by domain to show clearly where I can contribute and which tools I use.",
+            stats: [
+                { label: "Years learning", value: 2, suffix: "+" },
+                { label: "Technical areas", value: 6, suffix: "" },
+                { label: "Practice projects", value: 4, suffix: "+" },
+            ],
+            groups: [
+                { title: "Frontend", items: ["React", "JavaScript", "Tailwind CSS", "HTML/CSS"] },
+                { title: "Backend", items: ["Node.js", "Express", "PHP", "Laravel"] },
+                { title: "Mobile", items: ["Flutter", "Mobile interfaces", "Responsive design"] },
+                { title: "Databases", items: ["MySQL", "SQL", "Modeling"] },
+                { title: "Tools", items: ["Git", "GitHub", "Vite", "VS Code"] },
+                { title: "Networking", items: ["Network basics", "Diagnostics", "Technical support"] },
+            ],
+        },
         testimonials: {
             eyebrow: "Feedback",
             titleStart: "Visitors can leave",
@@ -370,12 +497,31 @@ const translations = {
             emailSubject: "Contact from your portfolio",
             emailBody: "Hello Marius,%0D%0A%0D%0AI visited your portfolio and I would like to talk with you.",
             availability: "Available for projects, internships and collaborations.",
+            formTitle: "Send a message",
+            nameLabel: "Name",
+            senderEmailLabel: "Email",
+            messageLabel: "Message",
+            namePlaceholder: "Your name",
+            senderEmailPlaceholder: "your.email@example.com",
+            messagePlaceholder: "Describe your need or project...",
+            send: "Prepare email",
+            formNote:
+                "The form prepares an email with your message. For direct sending without a mail app, we will need to connect a service like Formspree, EmailJS or Resend.",
+        },
+        notFound: {
+            title: "Page not found",
+            description: "This page does not exist yet. Return home to continue browsing.",
+            action: "Back home",
         },
     },
 };
 
 export const LanguageProvider = ({ children }) => {
     const [language, setLanguage] = useState("fr");
+
+    useEffect(() => {
+        document.documentElement.lang = language;
+    }, [language]);
 
     const value = useMemo(
         () => ({

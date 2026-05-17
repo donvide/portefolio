@@ -24,6 +24,26 @@
 }
 
 @layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --color-background: #f6f8fb;
+    --color-foreground: #111827;
+    --color-card: #ffffff;
+    --color-primary: #0f9f95;
+    --color-primary-foreground: #ffffff;
+    --color-secondary: #e8eef3;
+    --color-secondary-foreground: #087d76;
+    --color-muted: #e6ebf0;
+    --color-muted-foreground: #667085;
+    --color-border: #d7dee7;
+    --color-highlight: #d98a05;
+    --color-surface: #f0f4f8;
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -32,6 +52,7 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: 'Inter', sans-serif;
+    transition: background-color 0.35s ease, color 0.35s ease;
   }
 
   .font-srif {
@@ -41,13 +62,13 @@
 
 @layer components{
   .glass {
-    background: color-mix(in srgb, var(--color-surface) 50%, transparent);
+    background: color-mix(in srgb, var(--color-surface) 58%, transparent);
     backdrop-filter: blur(16px);
     border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
   }
 
-   .glass-strong {
-    background: color-mix(in srgb, var(--color-surface) 50%, transparent);
+  .glass-strong {
+    background: color-mix(in srgb, var(--color-surface) 78%, transparent);
     backdrop-filter: blur(16px);
     border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
   }
@@ -137,6 +158,22 @@
     animation: marquee 20s linear infinite;
   }
 
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(8px);
+    transition:
+      opacity 0.7s ease,
+      transform 0.7s ease,
+      filter 0.7s ease;
+  }
+
+  .scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+
   .experience-line {
     background: linear-gradient(
       to bottom,
@@ -203,6 +240,17 @@
   .animated-border:hover {
     background-color: color-mix(in srgb, #26c4b8 15%, transparent);
     box-shadow: 0 0 20px color-mix(in srgb, #26c4b8 20%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 
 

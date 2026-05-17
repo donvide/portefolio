@@ -21,7 +21,7 @@ export const About = () => {
                         
                     <h2 className="text-4xl md:text-5xl font-bold leading-tight animate-fade-in animation-delay-100 text-secondary-foreground">
                         {t.about.titleStart}
-                    <span className="font-serif italic font-normal text-white">{t.about.titleEnd}</span>
+                    <span className="font-serif italic font-normal text-foreground">{t.about.titleEnd}</span>
                     </h2>
 
                     <div className="space-y-4 text-muted-foreground animate-fade-in animation-delay-200">
