@@ -1,12 +1,13 @@
-import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { useEffect, useState } from "react";
+import { useInView } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 
 export const AnimatedCounter = ({ value, suffix = "", duration = 1200 }) => {
-    const { ref, isVisible } = useScrollReveal({ threshold: 0.35 });
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, amount: 0.5 });
     const [count, setCount] = useState(0);
 
     useEffect(() => {
-        if (!isVisible) {
+        if (!isInView) {
             return undefined;
         }
 
@@ -26,7 +27,7 @@ export const AnimatedCounter = ({ value, suffix = "", duration = 1200 }) => {
         frameId = requestAnimationFrame(tick);
 
         return () => cancelAnimationFrame(frameId);
-    }, [duration, isVisible, value]);
+    }, [duration, isInView, value]);
 
     return (
         <span ref={ref}>

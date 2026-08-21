@@ -7,6 +7,7 @@ import {Skills} from "@/sections/Skills";
 import {Testimoniales} from "@/sections/Testimoniales";
 import {Contacts} from "@/sections/Contacts";
 import {Navbar} from "@/layout/Navbar";
+import { ScrollProgress } from "@/components/ScrollProgress";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 import { ThemeProvider } from "@/theme/ThemeContext";
 import { NotFound } from "@/sections/NotFound";
@@ -17,6 +18,7 @@ function App() {
     <LanguageProvider>
       <ThemeProvider>
         <div className="min-h-screen overflow-x-hidden">
+          <ScrollProgress/>
           {isKnownPath ? (
             <>
               <Navbar/>

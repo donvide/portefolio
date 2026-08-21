@@ -212,22 +212,30 @@ const translations = {
         },
         testimonials: {
             eyebrow: "Avis & retours",
-            titleStart: "Ils peuvent laisser",
-            titleEnd: " un témoignage",
+            titleStart: "Ce qu'ils disent de",
+            titleEnd: " mon travail",
             description:
-                "Les visiteurs peuvent partager un retour directement depuis cette page. Le témoignage apparaît automatiquement dans cette section sur leur navigateur.",
-            formTitle: "Ajouter un témoignage",
-            nameLabel: "Nom",
-            roleLabel: "Profil ou relation",
-            messageLabel: "Message",
-            namePlaceholder: "Votre nom",
-            rolePlaceholder: "Client, camarade, collaborateur...",
-            messagePlaceholder: "Écrivez votre témoignage...",
-            submit: "Publier le témoignage",
-            empty: "Aucun témoignage pour le moment. Soyez le premier à laisser un retour.",
-            saved: "Témoignage ajouté",
-            storageNote:
-                "Note : sans base de données, les témoignages sont conservés localement dans le navigateur du visiteur.",
+                "Retours de personnes avec qui j'ai collaboré lors de mes stages, projets académiques et missions techniques.",
+            items: [
+                {
+                    name: "Superviseur CITECH",
+                    role: "Encadreur de stage, CITECH Sarl",
+                    message:
+                        "Marius a fait preuve d'une grande rigueur durant son stage. Curieux, autonome et rapide à apprendre, il s'est adapté à nos outils PHP et MySQL avec beaucoup de sérieux.",
+                },
+                {
+                    name: "Camarade de promotion",
+                    role: "Collaborateur projet, HECM",
+                    message:
+                        "J'ai travaillé avec Marius sur plusieurs projets de groupe. Il structure bien le code, respecte les délais et explique clairement ses choix techniques. Un vrai plaisir en équipe.",
+                },
+                {
+                    name: "Client landing page",
+                    role: "Projet freelance",
+                    message:
+                        "Il a transformé ma simple idée en une landing page moderne et fluide. Communication facile, rendu fidèle à la maquette et livré dans les temps.",
+                },
+            ],
         },
         contact: {
             eyebrow: "Contact",
@@ -248,9 +256,12 @@ const translations = {
             namePlaceholder: "Votre nom",
             senderEmailPlaceholder: "votre.email@example.com",
             messagePlaceholder: "Décrivez votre besoin ou votre projet...",
-            send: "Préparer l'email",
+            send: "Envoyer le message",
+            sending: "Envoi en cours...",
+            successMessage: "Message envoyé ! Je te réponds dès que possible.",
+            errorMessage: "Une erreur est survenue. Réessaie ou passe par WhatsApp.",
             formNote:
-                "Le formulaire prépare un email avec votre message. Pour un envoi direct sans application mail, il faudra connecter un service comme Formspree, EmailJS ou Resend.",
+                "Ton message m'est envoyé directement par email. Tu peux aussi me joindre sur WhatsApp pour une réponse plus rapide.",
         },
         notFound: {
             title: "Page introuvable",
@@ -468,22 +479,30 @@ const translations = {
         },
         testimonials: {
             eyebrow: "Feedback",
-            titleStart: "Visitors can leave",
-            titleEnd: " a testimonial",
+            titleStart: "What people say about",
+            titleEnd: " my work",
             description:
-                "Visitors can share feedback directly from this page. The testimonial appears automatically in this section on their browser.",
-            formTitle: "Add a testimonial",
-            nameLabel: "Name",
-            roleLabel: "Profile or relation",
-            messageLabel: "Message",
-            namePlaceholder: "Your name",
-            rolePlaceholder: "Client, classmate, collaborator...",
-            messagePlaceholder: "Write your testimonial...",
-            submit: "Publish testimonial",
-            empty: "No testimonials yet. Be the first to leave feedback.",
-            saved: "Testimonial added",
-            storageNote:
-                "Note: without a database, testimonials are stored locally in the visitor's browser.",
+                "Feedback from people I collaborated with during internships, academic projects and technical missions.",
+            items: [
+                {
+                    name: "CITECH Supervisor",
+                    role: "Internship mentor, CITECH Sarl",
+                    message:
+                        "Marius showed great rigor during his internship. Curious, autonomous and a fast learner, he adapted to our PHP and MySQL tooling with real professionalism.",
+                },
+                {
+                    name: "Classmate",
+                    role: "Project collaborator, HECM",
+                    message:
+                        "I worked with Marius on several group projects. He structures code well, meets deadlines and clearly explains his technical choices. A great teammate.",
+                },
+                {
+                    name: "Landing page client",
+                    role: "Freelance project",
+                    message:
+                        "He turned my simple idea into a modern, smooth landing page. Easy communication, result faithful to the mockup and delivered on time.",
+                },
+            ],
         },
         contact: {
             eyebrow: "Contact",
@@ -504,9 +523,12 @@ const translations = {
             namePlaceholder: "Your name",
             senderEmailPlaceholder: "your.email@example.com",
             messagePlaceholder: "Describe your need or project...",
-            send: "Prepare email",
+            send: "Send message",
+            sending: "Sending...",
+            successMessage: "Message sent! I will get back to you as soon as possible.",
+            errorMessage: "Something went wrong. Please try again or reach out on WhatsApp.",
             formNote:
-                "The form prepares an email with your message. For direct sending without a mail app, we will need to connect a service like Formspree, EmailJS or Resend.",
+                "Your message is sent directly to my inbox. You can also reach me on WhatsApp for a faster reply.",
         },
         notFound: {
             title: "Page not found",

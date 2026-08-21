@@ -75,13 +75,54 @@
 
   .glass-text {
     text-shadow: 0 0 30px
-      color-mix(in srgb, var(--color-primary) 50%, transparent); 
+      color-mix(in srgb, var(--color-primary) 50%, transparent);
+  }
+
+  .glow-text {
+    text-shadow:
+      0 0 18px color-mix(in srgb, var(--color-primary) 55%, transparent),
+      0 0 60px color-mix(in srgb, var(--color-primary) 30%, transparent);
   }
 
   .glow-border {
     box-shadow: 0 0 30px
       color-mix(in srgb, var(--color-primary) 20%, transparent);
       inset :0 0 20px color-mix(in srgb, var(--color-primary) 5%, transparent);
+  }
+
+  .spotlight-card {
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+    --spotlight-opacity: 0;
+    position: relative;
+  }
+
+  .spotlight-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: var(--spotlight-opacity);
+    transition: opacity 0.45s ease;
+    background:
+      radial-gradient(
+        340px circle at var(--mouse-x) var(--mouse-y),
+        color-mix(in srgb, var(--color-primary) 14%, transparent),
+        transparent 70%
+      );
+  }
+
+  .spotlight-glow::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+      radial-gradient(
+        180px circle at var(--mouse-x) var(--mouse-y),
+        color-mix(in srgb, var(--color-highlight) 8%, transparent),
+        transparent 70%
+      );
   }
 }
 
@@ -156,22 +197,6 @@
   }
   .animate-marquee {
     animation: marquee 20s linear infinite;
-  }
-
-  .scroll-reveal {
-    opacity: 0;
-    transform: translateY(28px);
-    filter: blur(8px);
-    transition:
-      opacity 0.7s ease,
-      transform 0.7s ease,
-      filter 0.7s ease;
-  }
-
-  .scroll-reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
   }
 
   .experience-line {

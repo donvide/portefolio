@@ -1,6 +1,20 @@
+import { StaggerGroup, StaggerItem } from "@/components/Reveal";
+import { SpotlightCard } from "@/components/SpotlightCard";
 import { useLanguage } from "@/i18n/useLanguage";
-import { Mail, MessageCircle, Send, Sparkles } from "lucide-react";
+import {
+    AlertCircle,
+    CheckCircle2,
+    Loader2,
+    Mail,
+    MessageCircle,
+    Send,
+    Sparkles,
+} from "lucide-react";
 import { useState } from "react";
+
+// Crée ton formulaire gratuit sur https://formspree.io puis colle ton ID ici.
+// Exemple : "https://formspree.io/f/xldjkqwe"
+const FORMSPREE_ENDPOINT = "";
 
 const whatsappNumber = "2290155582917";
 const emailAddress = "mawunamimarius@gmail.com";
@@ -12,6 +26,8 @@ export const Contacts = () => {
         senderEmail: "",
         message: "",
     });
+    const [status, setStatus] = useState("idle");
+
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(t.contact.whatsappText)}`;
     const emailUrl = `mailto:${emailAddress}?subject=${encodeURIComponent(t.contact.emailSubject)}&body=${t.contact.emailBody}`;
     const formEmailUrl = `mailto:${emailAddress}?subject=${encodeURIComponent(t.contact.emailSubject)}&body=${encodeURIComponent(
@@ -21,11 +37,38 @@ export const Contacts = () => {
     const handleChange = (event) => {
         const { name, value } = event.target;
         setForm((current) => ({ ...current, [name]: value }));
+        if (status !== "idle") setStatus("idle");
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        window.location.href = formEmailUrl;
+
+        if (!FORMSPREE_ENDPOINT) {
+            window.location.href = formEmailUrl;
+            return;
+        }
+
+        setStatus("sending");
+
+        try {
+            const response = await fetch(FORMSPREE_ENDPOINT, {
+                method: "POST",
+                headers: { "Content-Type": "application/json", Accept: "application/json" },
+                body: JSON.stringify({
+                    name: form.name,
+                    email: form.senderEmail,
+                    message: form.message,
+                    _replyto: form.senderEmail,
+                }),
+            });
+
+            if (!response.ok) throw new Error("Request failed");
+
+            setStatus("success");
+            setForm({ name: "", senderEmail: "", message: "" });
+        } catch {
+            setStatus("error");
+        }
     };
 
     return (
@@ -34,96 +77,132 @@ export const Contacts = () => {
 
             <div className="container relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-                    <div className="glass glow-border rounded-2xl p-6 md:p-10">
-                        <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                            <Sparkles className="h-7 w-7" />
-                        </div>
-                        <span className="text-sm font-medium uppercase tracking-wider text-secondary-foreground">
-                            {t.contact.eyebrow}
-                        </span>
-                        <h2 className="mt-4 text-4xl font-bold text-secondary-foreground md:text-5xl">
-                            {t.contact.titleStart}
-                            <span className="font-serif italic font-normal text-foreground">{t.contact.titleEnd}</span>
-                        </h2>
-                        <p className="mt-6 text-muted-foreground">{t.contact.description}</p>
-
-                        <div className="mt-8 flex flex-col gap-4">
-                            <a
-                                href={whatsappUrl}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-primary-foreground transition-all duration-300 hover:-translate-y-px hover:bg-primary/90"
-                            >
-                                <MessageCircle className="h-5 w-5" />
-                                {t.contact.whatsapp}
-                            </a>
-                            <a
-                                href={emailUrl}
-                                className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-6 py-3 font-medium text-muted-foreground transition-all duration-300 hover:border-primary/50 hover:text-primary"
-                            >
-                                <Mail className="h-5 w-5" />
-                                {t.contact.email}
-                            </a>
-                        </div>
-
-                        <p className="mt-6 text-sm text-muted-foreground">{t.contact.availability}</p>
-                    </div>
-
-                    <form onSubmit={handleSubmit} className="glass rounded-2xl p-6 md:p-8">
-                        <h3 className="text-2xl font-semibold text-foreground">{t.contact.formTitle}</h3>
-                        <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                            <label className="block">
-                                <span className="mb-2 block text-sm font-medium text-muted-foreground">
-                                    {t.contact.nameLabel}
+                    <StaggerGroup stagger={0.12}>
+                        <StaggerItem>
+                            <SpotlightCard className="glass glow-border rounded-2xl p-6 md:p-10 h-full">
+                                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                                    <Sparkles className="h-7 w-7" />
+                                </div>
+                                <span className="text-sm font-medium uppercase tracking-wider text-secondary-foreground">
+                                    {t.contact.eyebrow}
                                 </span>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    value={form.name}
-                                    onChange={handleChange}
-                                    placeholder={t.contact.namePlaceholder}
-                                    className="w-full rounded-xl border border-border bg-surface px-4 py-3 text-foreground outline-none transition-colors duration-300 placeholder:text-muted-foreground/60 focus:border-primary/60"
-                                    required
-                                />
-                            </label>
-                            <label className="block">
-                                <span className="mb-2 block text-sm font-medium text-muted-foreground">
-                                    {t.contact.senderEmailLabel}
-                                </span>
-                                <input
-                                    type="email"
-                                    name="senderEmail"
-                                    value={form.senderEmail}
-                                    onChange={handleChange}
-                                    placeholder={t.contact.senderEmailPlaceholder}
-                                    className="w-full rounded-xl border border-border bg-surface px-4 py-3 text-foreground outline-none transition-colors duration-300 placeholder:text-muted-foreground/60 focus:border-primary/60"
-                                    required
-                                />
-                            </label>
-                        </div>
-                        <label className="mt-4 block">
-                            <span className="mb-2 block text-sm font-medium text-muted-foreground">
-                                {t.contact.messageLabel}
-                            </span>
-                            <textarea
-                                name="message"
-                                value={form.message}
-                                onChange={handleChange}
-                                placeholder={t.contact.messagePlaceholder}
-                                rows="7"
-                                className="w-full resize-none rounded-xl border border-border bg-surface px-4 py-3 text-foreground outline-none transition-colors duration-300 placeholder:text-muted-foreground/60 focus:border-primary/60"
-                                required
-                            />
-                        </label>
-                        <button
-                            type="submit"
-                            className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-primary-foreground transition-all duration-300 hover:-translate-y-px hover:bg-primary/90 sm:w-auto"
-                        >
-                            {t.contact.send}
-                            <Send className="h-4 w-4" />
-                        </button>
-                        <p className="mt-5 text-xs leading-6 text-muted-foreground">{t.contact.formNote}</p>
-                    </form>
+                                <h2 className="mt-4 text-4xl font-bold text-secondary-foreground md:text-5xl">
+                                    {t.contact.titleStart}
+                                    <span className="font-serif italic font-normal text-foreground">
+                                        {t.contact.titleEnd}
+                                    </span>
+                                </h2>
+                                <p className="mt-6 text-muted-foreground">{t.contact.description}</p>
+
+                                <div className="mt-8 flex flex-col gap-4">
+                                    <a
+                                        href={whatsappUrl}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-primary-foreground transition-all duration-300 hover:-translate-y-px hover:bg-primary/90"
+                                    >
+                                        <MessageCircle className="h-5 w-5" />
+                                        {t.contact.whatsapp}
+                                    </a>
+                                    <a
+                                        href={emailUrl}
+                                        className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-6 py-3 font-medium text-muted-foreground transition-all duration-300 hover:border-primary/50 hover:text-primary"
+                                    >
+                                        <Mail className="h-5 w-5" />
+                                        {t.contact.email}
+                                    </a>
+                                </div>
+
+                                <p className="mt-6 text-sm text-muted-foreground">{t.contact.availability}</p>
+                            </SpotlightCard>
+                        </StaggerItem>
+                    </StaggerGroup>
+
+                    <StaggerGroup delay={0.15}>
+                        <StaggerItem y={32}>
+                            <form onSubmit={handleSubmit} className="glass rounded-2xl p-6 md:p-8">
+                                <h3 className="text-2xl font-semibold text-foreground">{t.contact.formTitle}</h3>
+                                <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                                    <label className="block">
+                                        <span className="mb-2 block text-sm font-medium text-muted-foreground">
+                                            {t.contact.nameLabel}
+                                        </span>
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            value={form.name}
+                                            onChange={handleChange}
+                                            placeholder={t.contact.namePlaceholder}
+                                            className="w-full rounded-xl border border-border bg-surface px-4 py-3 text-foreground outline-none transition-colors duration-300 placeholder:text-muted-foreground/60 focus:border-primary/60"
+                                            required
+                                        />
+                                    </label>
+                                    <label className="block">
+                                        <span className="mb-2 block text-sm font-medium text-muted-foreground">
+                                            {t.contact.senderEmailLabel}
+                                        </span>
+                                        <input
+                                            type="email"
+                                            name="senderEmail"
+                                            value={form.senderEmail}
+                                            onChange={handleChange}
+                                            placeholder={t.contact.senderEmailPlaceholder}
+                                            className="w-full rounded-xl border border-border bg-surface px-4 py-3 text-foreground outline-none transition-colors duration-300 placeholder:text-muted-foreground/60 focus:border-primary/60"
+                                            required
+                                        />
+                                    </label>
+                                </div>
+                                <label className="mt-4 block">
+                                    <span className="mb-2 block text-sm font-medium text-muted-foreground">
+                                        {t.contact.messageLabel}
+                                    </span>
+                                    <textarea
+                                        name="message"
+                                        value={form.message}
+                                        onChange={handleChange}
+                                        placeholder={t.contact.messagePlaceholder}
+                                        rows="7"
+                                        className="w-full resize-none rounded-xl border border-border bg-surface px-4 py-3 text-foreground outline-none transition-colors duration-300 placeholder:text-muted-foreground/60 focus:border-primary/60"
+                                        required
+                                    />
+                                </label>
+                                <button
+                                    type="submit"
+                                    disabled={status === "sending"}
+                                    className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 font-medium text-primary-foreground transition-all duration-300 hover:-translate-y-px hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+                                >
+                                    {status === "sending" ? (
+                                        <>
+                                            <Loader2 className="h-4 w-4 animate-spin" />
+                                            {t.contact.sending}
+                                        </>
+                                    ) : (
+                                        <>
+                                            {t.contact.send}
+                                            <Send className="h-4 w-4" />
+                                        </>
+                                    )}
+                                </button>
+
+                                {status === "success" && (
+                                    <p className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary">
+                                        <CheckCircle2 className="h-4 w-4" />
+                                        {t.contact.successMessage}
+                                    </p>
+                                )}
+                                {status === "error" && (
+                                    <p className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-red-400">
+                                        <AlertCircle className="h-4 w-4" />
+                                        {t.contact.errorMessage}
+                                    </p>
+                                )}
+
+                                <p className="mt-5 text-xs leading-6 text-muted-foreground">
+                                    {t.contact.formNote}
+                                </p>
+                            </form>
+                        </StaggerItem>
+                    </StaggerGroup>
                 </div>
             </div>
         </section>
