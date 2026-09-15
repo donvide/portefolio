@@ -1,6 +1,7 @@
 import { Button } from "@/components/Button";
 import { useLanguage } from "@/i18n/useLanguage";
 import { Home } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const NotFound = () => {
     const { t } = useLanguage();
@@ -13,9 +14,11 @@ export const NotFound = () => {
                 </div>
                 <h1 className="text-4xl font-bold text-secondary-foreground">{t.notFound.title}</h1>
                 <p className="mt-4 text-muted-foreground">{t.notFound.description}</p>
-                <Button className="mt-8" onClick={() => { window.location.href = "/"; }}>
-                    {t.notFound.action}
-                </Button>
+                <div className="mt-8">
+                    <Link to="/">
+                        <Button>{t.notFound.action}</Button>
+                    </Link>
+                </div>
             </section>
         </main>
     );

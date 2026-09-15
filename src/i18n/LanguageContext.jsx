@@ -71,6 +71,28 @@ const translations = {
             viewProject: "Voir le projet",
             sourceCode: "Code source",
             more: "Voir plus de projets",
+            featured: "En vedette",
+            categories: {
+                all: "Tous",
+                frontend: "Frontend",
+                backend: "Backend",
+                mobile: "Mobile",
+                fullstack: "Full Stack",
+            },
+            gallery: {
+                eyebrow: "Galerie de projets",
+                titleStart: "Tous mes ",
+                titleEnd: "projets",
+                description:
+                    "Explorez l'ensemble de mes réalisations : projets personnels, académiques et professionnels. Chaque projet reflète une étape de mon apprentissage et ma recherche constante de précision.",
+                resultOne: "projet",
+                resultMany: "projets",
+                empty: "Aucun projet dans cette catégorie pour le moment.",
+                ctaText:
+                    "Un projet en tête ? Parlons-en et donnons-lui vie ensemble.",
+                ctaAction: "Discutons de votre projet",
+                backHome: "Retour à l'accueil",
+            },
             items: [
                 {
                     title: "Mon portefolio",
@@ -80,6 +102,41 @@ const translations = {
                 {
                     title: "Landing page",
                     description: "Un projet de landing page réalisé avec React, Tailwind CSS et Python.",
+                },
+                {
+                    title: "Gestion de stock",
+                    description:
+                        "Application de gestion d'inventaire avec suivi des entrées/sorties, recherche avancée et exports. Un CRUD complet pensé pour être simple et efficace.",
+                },
+                {
+                    title: "Boutique e-commerce",
+                    description:
+                        "Plateforme de vente en ligne avec catalogue, panier et paiement. Mise en pratique du frontend React et d'une API Node.js reliée à MySQL.",
+                },
+                {
+                    title: "API REST Express",
+                    description:
+                        "API REST complète avec authentification JWT, validation des données et documentation des routes. Une exploration des bonnes pratiques backend.",
+                },
+                {
+                    title: "Chat temps réel",
+                    description:
+                        "Application de messagerie instantanée avec salons publics et privés. Une introduction au temps réel avec Socket.IO et Node.js.",
+                },
+                {
+                    title: "Tracker de tâches",
+                    description:
+                        "Application de productivité avec kanban, catégories et suivi de progression. Un focus sur l'expérience utilisateur et les animations.",
+                },
+                {
+                    title: "Dashboard admin",
+                    description:
+                        "Tableau de bord analytique avec graphiques, filtres et vue responsive. Un exercice d'interface dense et lisible.",
+                },
+                {
+                    title: "App mobile Flutter",
+                    description:
+                        "Application mobile multiplateforme avec navigation fluide et thème sombre. Une première production avec Flutter et Dart.",
                 },
             ],
         },
@@ -338,6 +395,27 @@ const translations = {
             viewProject: "View project",
             sourceCode: "Source code",
             more: "View more projects",
+            featured: "Featured",
+            categories: {
+                all: "All",
+                frontend: "Frontend",
+                backend: "Backend",
+                mobile: "Mobile",
+                fullstack: "Full Stack",
+            },
+            gallery: {
+                eyebrow: "Projects gallery",
+                titleStart: "All my ",
+                titleEnd: "projects",
+                description:
+                    "Explore all my work: personal, academic and professional projects. Each one reflects a step in my learning journey and my constant pursuit of precision.",
+                resultOne: "project",
+                resultMany: "projects",
+                empty: "No projects in this category yet.",
+                ctaText: "Have a project in mind? Let's talk and bring it to life together.",
+                ctaAction: "Let's discuss your project",
+                backHome: "Back to home",
+            },
             items: [
                 {
                     title: "My portfolio",
@@ -347,6 +425,41 @@ const translations = {
                 {
                     title: "Landing page",
                     description: "A landing page project built with React, Tailwind CSS and Python.",
+                },
+                {
+                    title: "Stock management",
+                    description:
+                        "Inventory management app with stock in/out tracking, advanced search and exports. A complete CRUD designed to be simple and efficient.",
+                },
+                {
+                    title: "E-commerce store",
+                    description:
+                        "Online store with catalog, cart and checkout. A practical exercise combining a React frontend with a Node.js API connected to MySQL.",
+                },
+                {
+                    title: "Express REST API",
+                    description:
+                        "Complete REST API with JWT authentication, input validation and route documentation. An exploration of backend best practices.",
+                },
+                {
+                    title: "Realtime chat",
+                    description:
+                        "Instant messaging app with public and private rooms. An introduction to realtime development with Socket.IO and Node.js.",
+                },
+                {
+                    title: "Task tracker",
+                    description:
+                        "Productivity app with kanban board, categories and progress tracking. Focus on user experience and animations.",
+                },
+                {
+                    title: "Admin dashboard",
+                    description:
+                        "Analytics dashboard with charts, filters and a responsive layout. An exercise in dense, readable interface design.",
+                },
+                {
+                    title: "Flutter mobile app",
+                    description:
+                        "Cross-platform mobile app with smooth navigation and dark theme. A first production built with Flutter and Dart.",
                 },
             ],
         },
