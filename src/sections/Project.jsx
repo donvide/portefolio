@@ -16,7 +16,7 @@ const projectAssets = [
         mediaType: "video",
         media: "/projects/projet-landing.webm",
         tags: ["React", "Tailwind CSS", "Python"],
-        link: "#",
+        link: "https://donvide.github.io/landing-page/",
         github: "https://github.com/donvide/portefolio",
     },
 ];
